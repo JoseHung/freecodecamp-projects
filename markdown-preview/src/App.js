@@ -1,8 +1,19 @@
 const App = () => {
+    const [content, setContent] = React.useState();
+    const [markdown, setMarkdown] = React.useState();
+
+    const onChangeHandler = event => {
+        const presentContent = event.target.value;
+        setContent(presentContent);
+        const presentMarkdown = marked.parse(presentContent);
+        setMarkdown(presentMarkdown);  
+        
+    }
+
     return (
         <div>
-            <textarea id="editor" />
-            <div id="preview" />
+            <textarea id="editor" onChange={onChangeHandler} />
+            <div id="preview" dangerouslySetInnerHTML={{__html: markdown}} />
         </div>
     )
 }

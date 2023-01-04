@@ -1,6 +1,9 @@
 #preview {
     width: 50%;
-    height: 200vh;
-    background-color: black;
+    height: 100vh;
+    background-color: rgb(83, 224, 240);
     float: right;
+    color: black;
+    border: 2px solid black;
+    padding: 10px;
 }
