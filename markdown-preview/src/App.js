@@ -1,116 +1,24 @@
 const App = () => {
-    const [content, setContent] = React.useState();
+    const initial = "# You can edit the content at left! \n## This is a sub-heading...\n\### There's also [links](https://github.com/JoseHung)\n";
+
+    const [content, setContent] = React.useState(initial);
     const [markdown, setMarkdown] = React.useState();
+
+    React.useEffect(() => {
+        setMarkdown(marked.parse(content));
+    });
 
     const onChangeHandler = event => {
         const presentContent = event.target.value;
         setContent(presentContent);
         const presentMarkdown = marked.parse(presentContent);
         setMarkdown(presentMarkdown);  
-        
-    }
-
-    return (
-        <div>
-            <textarea id="editor" onChange={onChangeHandler} />
-            <div id="preview" dangerouslySetInnerHTML={{__html: markdown}} />
-        </div>
-    )
-}
-
-/*
-const App = () => {
-    const [pokemons, setPokemons] = React.useState([]);
-    const [filteredPokemons, setFilteredPokemons] = React.useState([]);
-
-    React.useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon")
-            .then(res => res.json())
-            .then(json => {
-                json.results.map((result, index) => {
-                    result.id = index + 1;
-                });
-                setPokemons(json.results);
-                setFilteredPokemons(json.results);
-            });
-    }, [])
-    
-
-    const onChangeHandler = event => {
-        const comparedPokemons = pokemons.filter(pokemon => {
-            return pokemon.name.includes(event.target.value);
-        });
-
-        setFilteredPokemons(comparedPokemons);
     };
 
     return (
         <div>
-            <h1>Pokemon</h1>
-            <Input onChangeHandler={onChangeHandler} />
-            <Lists pokemonsLists={filteredPokemons} />
+            <textarea id="editor" onChange={onChangeHandler} value={content} />
+            <div id="preview" dangerouslySetInnerHTML={{__html: markdown}} />
         </div>
     );
 };
-*/
-
-/*
-class App extends React.Component {
-    constructor() {
-        console.log("构造函数");
-        super();
-        this.state = {
-            pokemons: [],
-            filteredPokemons: [],
-        };
-    }
-
-    componentDidMount() {
-        console.log("组件已挂载");
-        fetch("https://pokeapi.co/api/v2/pokemon")
-            .then(res => res.json())
-            .then(json => {
-                json.results.map((result, index) => {
-                    result.id = index + 1;
-                });
-                this.setState(
-                    () => {
-                        return {
-                            pokemons: json.results,
-                            filteredPokemons: json.results,
-                        };
-                    },
-                    () => {
-                        console.log(this.state);
-                    }
-                );
-            });
-    }
-
-    onChangeHandler = event => {
-        const comparedPokemons = this.state.pokemons.filter(pokemon => {
-            return pokemon.name.includes(event.target.value);
-        });
-
-        this.setState(
-            () => {
-                return { filteredPokemons: comparedPokemons };
-            },
-            () => {
-                console.log(this.state.searching);
-            }
-        );
-    }
-
-    render() {
-        console.log("渲染");
-        return (
-            <div>
-                <h1>Pokemon</h1>
-                <Input onChangeHandler={this.onChangeHandler} />
-                <Lists pokemonLists={this.state.filteredPokemons} />
-            </div>
-        );
-    }
-}
-*/
