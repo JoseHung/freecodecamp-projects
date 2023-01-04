@@ -1,4 +1,14 @@
 const App = () => {
+    return (
+        <div>
+            <textarea id="editor" />
+            <div id="preview" />
+        </div>
+    )
+}
+
+/*
+const App = () => {
     const [pokemons, setPokemons] = React.useState([]);
     const [filteredPokemons, setFilteredPokemons] = React.useState([]);
 
@@ -31,6 +41,7 @@ const App = () => {
         </div>
     );
 };
+*/
 
 /*
 class App extends React.Component {
